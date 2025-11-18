@@ -13,7 +13,7 @@ public class CConexion {
     Connection conectar=null;
     
     String USER = "root";
-    String CONTRA = "2136";
+    String CONTRA = "CBTis198**";
     String bd = "biblioteca";
     String ip = "localhost";
     String puerto = "3306";
