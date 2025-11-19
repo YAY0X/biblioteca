@@ -14,7 +14,7 @@ public class EspecialidadesDAO {
             CConexion cbd = new CConexion();
             Connection con = cbd.estableceConexion();
             
-            String sql = "SELECT ESP FROM gg";
+            String sql = "SELECT descripcion FROM especialidad";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             

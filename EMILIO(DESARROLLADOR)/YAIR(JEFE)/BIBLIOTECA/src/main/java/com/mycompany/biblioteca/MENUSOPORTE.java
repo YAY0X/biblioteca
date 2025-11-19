@@ -41,14 +41,6 @@ public class MENUSOPORTE extends javax.swing.JFrame {
             }
         });
         
-        SEMESTREBD sms = new SEMESTREBD();
-        sms.cargarSemestre(SEMESTREFRM);
-        sms.cargarSemestre(assemestrefrm);
-        
-        TURNOBD trn = new TURNOBD();
-        trn.cargarTurnos(TURNOFRM3);
-        trn.cargarTurnos(TURNOFRM);
-        
         GRUPOSBD grp = new GRUPOSBD();
         grp.cargarGrupos(GRUPOFRM);
         grp.cargarGrupos(asgrupofrm);

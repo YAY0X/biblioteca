@@ -14,7 +14,7 @@ public class GRUPOSBD {
             CConexion cbd = new CConexion();
             Connection con = cbd.estableceConexion();
             
-            String sql = "SELECT GRUPO FROM gg";
+            String sql = "SELECT descripcion FROM grupo/grado";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             
