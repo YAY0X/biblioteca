@@ -14,7 +14,7 @@ public class GRUPOSBD {
             CConexion cbd = new CConexion();
             Connection con = cbd.estableceConexion();
             
-            String sql = "SELECT descripcion FROM grupo/grado";
+            String sql = "SELECT descripcion FROM gg";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             
@@ -29,7 +29,7 @@ public class GRUPOSBD {
             con.close();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR al cargar especialidades: " + e.toString());
+            JOptionPane.showMessageDialog(null, "ERROR al cargar grupos: " + e.toString());
         }
     }
     
