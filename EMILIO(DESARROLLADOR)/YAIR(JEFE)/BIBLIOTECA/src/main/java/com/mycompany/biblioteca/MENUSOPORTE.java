@@ -2347,6 +2347,7 @@ public class MENUSOPORTE extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Importar Libros");
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos PDF", "pdf"));
@@ -2408,10 +2409,10 @@ public class MENUSOPORTE extends javax.swing.JFrame {
                 panel.add(campoEditorial);
 
                 int opcion = JOptionPane.showConfirmDialog(
-                    this, 
-                    panel, 
-                    "Información del libro", 
-                    JOptionPane.OK_CANCEL_OPTION, 
+                    this,
+                    panel,
+                    "Información del libro",
+                    JOptionPane.OK_CANCEL_OPTION,
                     JOptionPane.PLAIN_MESSAGE
                 );
 
@@ -2421,7 +2422,27 @@ public class MENUSOPORTE extends javax.swing.JFrame {
                     return;
                 }
 
-                String codigoDewey = comboDewey.getSelectedItem().toString().split(" - ")[0];
+                // Obtener código Dewey base
+                String codigoDeweyBase = comboDewey.getSelectedItem().toString().split(" - ")[0];
+                String codigoDewey = codigoDeweyBase;
+
+                // Verificar si ya existe el código Dewey
+                String sqlCheck = "SELECT COUNT(*) AS total FROM libro WHERE dewey LIKE ?";
+                PreparedStatement psCheck = conn.prepareStatement(sqlCheck);
+                psCheck.setString(1, codigoDeweyBase + "%");
+                ResultSet rsCheck = psCheck.executeQuery();
+
+                if (rsCheck.next()) {
+                    int cantidad = rsCheck.getInt("total");
+
+                    if (cantidad > 0) {
+                        codigoDewey = codigoDeweyBase + "." + cantidad;
+                    }
+                }
+
+                rsCheck.close();
+                psCheck.close();
+
                 String autor = campoAutor.getText().trim();
                 String editorial = campoEditorial.getText().trim();
 
@@ -2457,7 +2478,7 @@ public class MENUSOPORTE extends javax.swing.JFrame {
                     "Título: " + nombreLibro + "\n" +
                     "Autor: " + autor + "\n" +
                     "Editorial: " + editorial + "\n" +
-                    "Código Dewey: " + codigoDewey + "\n" +
+                    "Código Dewey asignado: " + codigoDewey + "\n" +
                     "Número de páginas: " + numPaginas + "\n" +
                     "Guardado en: " + rutaPDF
                 );
